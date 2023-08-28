@@ -22,3 +22,8 @@ set_ppxf0.py
 set_ppxf_tot.py
 
 plt_tests_rdp.py
+
+
+## PPXF run
+
+set_ppxf_kin.py
