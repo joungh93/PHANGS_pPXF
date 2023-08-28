@@ -16,5 +16,3 @@ set_ppxf0.py
 ## For tests
 set_ppxf_tot.py
 plt_tests_rdp.py
-
-
