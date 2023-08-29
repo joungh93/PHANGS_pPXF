@@ -34,6 +34,7 @@ import extinction
 ebv = 0.030
 R_V = 3.1
 A_V = R_V * ebv
+lum_dist = 15.9   # Mpc
 
 dir_cube = "/data01/jhlee/DATA/PHANGS/MUSE/NGC1087/"
 # with open(dir_cube+"box_spec_total.pickle", "rb") as fr:
@@ -42,7 +43,6 @@ dir_cube = "/data01/jhlee/DATA/PHANGS/MUSE/NGC1087/"
 #     box_vari = pickle.load(fr)
 # n_files = len(box_spec)
 # run_name, run_array = "part01", np.arange(86*0, np.minimum(86, n_files), 1)
-
 
 
 def draw_spectra(data, observed_wavelength, out, 
