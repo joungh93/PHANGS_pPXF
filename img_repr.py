@@ -151,7 +151,7 @@ for i in range(len(img_S4G)):
 # ----- SDSS Images ----- #
 pxs_sdss = 0.2    # arcsec/pixel
 dir_sdss = "./"
-img_sdss = sorted(glob.glob(dir_sdss+"NGC1087_PHANGS_IMAGE_SDSS_*_copt_0.92asec.fits"))
+img_sdss = sorted(glob.glob(dir_sdss+"NGC1087_PHANGS_IMAGE_SDSS_*_copt_*asec.fits"))
 
 for i in range(len(img_sdss)):
     band = img_sdss[i].split('.fits')[0].split('_')[4]
