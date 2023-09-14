@@ -52,6 +52,7 @@ xInd, yInd = 10-1, 15-1
 lum_dist = 15.9   # Mpc
 dist_mod = 5.0*np.log10(lum_dist*1.0e+6 / 10.)
 ang_scale = lum_dist * 1.0e+6 * (1./3600) * (np.pi/180.)   # pc/arcsec
+print(f"Scale: {ang_scale:.3f} pc/arcsec")
 
 
 # ----- Absolute magnitudes ----- #
