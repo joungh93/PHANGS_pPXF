@@ -31,20 +31,26 @@ from ppxf.ppxf import ppxf, robust_sigma, attenuation
 import ppxf.ppxf_util as util
 import ppxf.miles_util as lib
 import extinction
+
+
+# ----- Radial information ----- #
+galaxy_name = "NGC1087"
+pxs = 6.2   # arcsec/pixel
+R25 = 1.5   # arcmin
+nbin = 20
+rads = 0.05 * (1+np.arange(nbin-1)) * R25 * 60. / pxs
+xInd, yInd = 10-1, 15-1
+
 ebv = 0.030
 R_V = 3.1
 A_V = R_V * ebv
 lum_dist = 15.9   # Mpc
-
-dir_cube = "/data01/jhlee/DATA/PHANGS/MUSE/NGC1087/"
-# with open(dir_cube+"box_spec_total.pickle", "rb") as fr:
-#     box_spec = pickle.load(fr)
-# with open(dir_cube+"box_vari_total.pickle", "rb") as fr:
-#     box_vari = pickle.load(fr)
-# n_files = len(box_spec)
-# run_name, run_array = "part01", np.arange(86*0, np.minimum(86, n_files), 1)
+dist_mod = 5.0*np.log10(lum_dist*1.0e+6 / 10.)
+ang_scale = lum_dist * 1.0e+6 * (1./3600) * (np.pi/180.)   # pc/arcsec
+print(f"Scale: {ang_scale:.3f} pc/arcsec")
 
 
+# ----- Functions ----- #
 def draw_spectra(data, observed_wavelength, out, 
                  xlabel=r"Observer-frame Wavelength [$\rm \AA$]",
                  ylabel=r"Flux Density [$10^{-20}~{\rm erg~s^{-1}~cm^{-2}~\AA^{-1}}$]"):
@@ -223,8 +229,6 @@ def run_ppxf1(spectrum, observed_wavelength, tempath_kn, tempath_sp,
     # lamRange1 = h1['CRVAL1'] + np.array([0., h1['CDELT1']*(h1['NAXIS1'] - 1)])
     # sspNew, logLam1, velscale_temp = util.log_rebin(lamRange1, ssp, velscale=vscale)
     # print(velscale_temp)
-
-
 
     if not fix_kn:
 
@@ -501,14 +505,9 @@ if (__name__ == '__main__'):
 
     n_ppxf = len(splib) * len(wav_rng) * len(mdegs)
 
-    pxs = 6.2    # arcsec/pixel
-    R25 = 1.5    # arcmin
-    nbin = 20
-    rads = 0.05 * (1+np.arange(nbin-1)) * R25 * 60. / pxs
-    xInd, yInd = 10-1, 15-1
-
 
     # ----- Loading MUSE spectra data cube ----- #
+    dir_cube = "/data01/jhlee/DATA/PHANGS/MUSE/"+galaxy_name+"/"
     fitsname = dir_cube + "DATACUBE_SPHEREx_extcor.fits"
     sp = fits.open(fitsname)
     d_sci, h_sci = sp[1].data, sp[1].header
